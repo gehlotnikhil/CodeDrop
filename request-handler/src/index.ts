@@ -8,6 +8,7 @@ import mime from "mime"; // npm install mime
 const app = express();
 import cors from "cors";
 app.use(cors())
+app.get("/",(req,res)=>{res.send("Hello")})
 app.get("/{*any}", async (req, res) => {
   const host = req.hostname;
   const id = host.split(".")[0]; // like jjw2g

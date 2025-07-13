@@ -21,6 +21,7 @@ const mime_1 = __importDefault(require("mime")); // npm install mime
 const app = (0, express_1.default)();
 const cors_1 = __importDefault(require("cors"));
 app.use((0, cors_1.default)());
+app.get("/", (req, res) => { res.send("Hello"); });
 app.get("/{*any}", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const host = req.hostname;
     const id = host.split(".")[0]; // like jjw2g
