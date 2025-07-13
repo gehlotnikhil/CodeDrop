@@ -1,0 +1,1 @@
+{"root":["./src/buildproject.ts","./src/copyfinaldest.ts","./src/downloadfiles.ts","./src/getallfile.ts","./src/index.ts","./src/superbase.ts","./src/uploadallfile.ts"],"version":"5.8.3"}

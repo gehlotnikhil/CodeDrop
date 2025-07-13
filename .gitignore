@@ -1,0 +1,13 @@
+frontend/node_modules
+deploy-service/node_modules
+request-handler/node_modules
+server/node_modules
+
+
+frontend/src/.env
+deploy-service/src/.env.local
+request-handler/src/.env.local
+server/src/.env.local
+
+.env
+ak
