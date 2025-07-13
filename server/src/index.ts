@@ -81,6 +81,7 @@ app.post("/deploy",async (req,res)=>{
     res.json({"id":id})
 })
 
+app.get("/",(req,res)=>{res.send("Hello")})
 
 
 app.get("/status",async(req,res)=>{

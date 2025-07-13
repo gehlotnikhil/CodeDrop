@@ -13,15 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+dotenv_1.default.config(); // loads .env first
+dotenv_1.default.config({ path: ".env.local" });
 const redis_1 = require("redis");
 const downloadFiles_1 = require("./downloadFiles");
 const buildProject_1 = require("./buildProject");
 const copyFinalDest_1 = require("./copyFinalDest");
-console.log("--", process.env.PORT);
 const publisher = (0, redis_1.createClient)({
     username: "default",
-    password: process.env.PASSWORD, // Use the PASSWORD from .env.local
+    password: process.env.REDIS_PASSWORD, // Use the PASSWORD from .env.local
     socket: {
         host: process.env.REDIS_HOST,
         port: 12961,

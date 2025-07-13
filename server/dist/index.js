@@ -12,6 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config(); // loads .env first
+dotenv_1.default.config({ path: ".env.local" });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const utils_1 = require("./utils");
@@ -24,19 +27,19 @@ const cors_1 = __importDefault(require("cors"));
 app.use((0, cors_1.default)());
 const subscriber = (0, redis_1.createClient)({
     username: "default",
-    password: "ysn0cCdVJ9q3NTlIqO4YlqAqnDMZkhXu",
+    password: process.env.REDIS_PASSWORD, // Use the PASSWORD from .env.local
     socket: {
-        host: "redis-12961.c232.us-east-1-2.ec2.redns.redis-cloud.com",
+        host: process.env.REDIS_HOST,
         port: 12961,
     },
 });
 const publisher = (0, redis_1.createClient)({
-    username: 'default',
-    password: 'ysn0cCdVJ9q3NTlIqO4YlqAqnDMZkhXu',
+    username: "default",
+    password: process.env.REDIS_PASSWORD,
     socket: {
-        host: 'redis-12961.c232.us-east-1-2.ec2.redns.redis-cloud.com',
+        host: process.env.REDIS_HOST,
         port: 12961,
-    }
+    },
 });
 subscriber.on('error', err => console.log('Redis Client Error', err));
 publisher.on('error', err => console.log('Redis Client Error', err));
@@ -77,6 +80,7 @@ app.post("/deploy", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     publisher.hSet("status", id, "uploaded");
     res.json({ "id": id });
 }));
+app.get("/", (req, res) => { res.send("Hello"); });
 app.get("/status", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.query.id;
     console.log(id);
