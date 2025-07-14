@@ -27,7 +27,7 @@ const cors_1 = __importDefault(require("cors"));
 app.use((0, cors_1.default)());
 const subscriber = (0, redis_1.createClient)({
     username: "default",
-    password: process.env.REDIS_PASSWORD, // Use the PASSWORD from .env.local
+    password: process.env.REDIS_PASSWORD,
     socket: {
         host: process.env.REDIS_HOST,
         port: 12961,

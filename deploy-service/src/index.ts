@@ -8,7 +8,7 @@ import { copyFinalDest } from "./copyFinalDest";
 
 const publisher = createClient({ 
   username: "default", 
-  password: process.env.REDIS_PASSWORD, // Use the PASSWORD from .env.local
+  password: process.env.REDIS_PASSWORD, 
   socket: {
     host: process.env.REDIS_HOST , 
     port: 12961,

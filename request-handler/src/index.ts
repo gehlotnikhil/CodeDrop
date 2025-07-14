@@ -1,33 +1,34 @@
+import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
+import { lookup } from "mime-types";
+import { supabase } from "./superbase";
+
 dotenv.config();
 dotenv.config({ path: ".env.local" });
-
-import express from "express";
-import { supabase } from "./superbase";
-import mime from "mime";
-import cors from "cors";
 
 const app = express();
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello from wildcard handler!");
+// });
 
-app.get("*", async (req, res) => {
+app.get("/{*any}", async (req, res) => {
   const host = req.hostname;
-  const id = host.split(".")[0]; 
-  const filePath = req.path === "/" ? "index.html" : req.path.slice(1); 
+  const subdomain = host.split(".")[0];
+  const filePath = req.path === "/" ? "index.html" : req.path.slice(1);
 
   const { data, error } = await supabase
     .storage
     .from("selfhosting1")
-    .download(`dist/${id}/${filePath}`);
+    .download(`dist/${subdomain}/${filePath}`);
 
   if (error || !data) {
-    const fallback = await supabase.storage
+    const fallback = await supabase
+      .storage
       .from("selfhosting1")
-      .download(`dist/${id}/index.html`);
+      .download(`dist/${subdomain}/index.html`);
 
     if (fallback.data) {
       const buffer = Buffer.from(await fallback.data.arrayBuffer());
@@ -39,11 +40,9 @@ app.get("*", async (req, res) => {
   }
 
   const buffer = Buffer.from(await data.arrayBuffer());
-  const contentType = mime.getType(filePath) || "application/octet-stream";
-  res.set("Content-Type", contentType);
-  res.send(buffer);
+const contentType = lookup(filePath) || "application/octet-stream";  res.set("Content-Type", contentType);
+  return res.send(buffer);
 });
+// app.listen(3001)
 
-app.listen(3001, () => {
-  console.log("🚀 Supabase file server running on port 3001");
-});
+export default app;

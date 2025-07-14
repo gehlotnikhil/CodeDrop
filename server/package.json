@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc-watch --onSuccess \" npm run start \"",
-    "start": "nodemon dist/index.js"
+    "start": "nodemon dist/index.js",
+    "ts-build":"npx tsc -b"
   },
   "keywords": [],
   "author": "",
