@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config();
 import { createClient } from '@supabase/supabase-js';
 console.log("process.env.SUPERBASE_URL", process.env.SUPERBASE_URL);
 console.log("process.env.SUPERBASE_KEY", process.env.SUPERBASE_KEY);

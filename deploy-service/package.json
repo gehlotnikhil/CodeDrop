@@ -7,6 +7,7 @@
     "watch": " tsc-watch ",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "ts-build": "npx tsc -b"
+    
   },
   "keywords": [],
   "author": "",

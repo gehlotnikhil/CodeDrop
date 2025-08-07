@@ -1,11 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config();
+dotenv.config({ path: ".env.local" });
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import { lookup } from "mime-types";
 import { supabase } from "./superbase";
 
-dotenv.config();
-dotenv.config({ path: ".env.local" });
 
 const app = express();
 app.use(cors());
@@ -43,6 +43,6 @@ app.get("/{*any}", async (req, res) => {
 const contentType = lookup(filePath) || "application/octet-stream";  res.set("Content-Type", contentType);
   return res.send(buffer);
 });
-// app.listen(3001)
+app.listen(3001)
 
 export default app;

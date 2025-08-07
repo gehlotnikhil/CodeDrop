@@ -6,9 +6,9 @@ server/node_modules
 
 frontend/src/.env
 frontend/.env
-deploy-service/src/.env.local
-request-handler/src/.env.local
-server/src/.env.local
+deploy-service/.env
+request-handler/.env
+server/.env
 
-.env
+*.env
 ak

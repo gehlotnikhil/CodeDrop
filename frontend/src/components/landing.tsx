@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2, UploadCloud, CheckCircle } from "lucide-react";
 import { useState } from "react";
-import axios from "axios";
+import axios from "../util/axios";
 import { motion } from "framer-motion";
 
 const BACKEND_UPLOAD_URL =  import.meta.env.VITE_BACKEND_UPLOAD_URL || "http://localhost:3000";
@@ -27,7 +27,7 @@ export function Landing() {
     if (!repoUrl) return;
 
     setUploading(true);
-    const res = await axios.post(`${BACKEND_UPLOAD_URL}/deploy`, {
+    const res = await axios.post(`/deploy`, {
       repoUrl,
     });
     setUploadId(res.data.id);
@@ -35,7 +35,7 @@ export function Landing() {
 
     const interval = setInterval(async () => {
       const response = await axios.get(
-        `${BACKEND_UPLOAD_URL}/status?id=${res.data.id}`
+        `/status?id=${res.data.id}`
       );
       if (response.data.status === "deployed") {
         clearInterval(interval);
