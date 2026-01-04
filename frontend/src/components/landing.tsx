@@ -61,7 +61,7 @@ export function Landing() {
             <CardDescription className="text-center text-gray-600 dark:text-gray-400">
               Paste your GitHub repo URL to deploy it to{" "}
               <code className="bg-muted px-1 py-0.5 rounded text-xs">
-                *.{REQUEST_HANDLER_BACKEND_DOMAIN}
+                *.100xstack.me
               </code>
             </CardDescription>
           </CardHeader>
